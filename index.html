@@ -429,6 +429,127 @@
   }
   .car-dot.active{ background: var(--mint); width: 22px; border-radius: 4px; }
 
+  /* ---------- How-to-quit guide ---------- */
+  .guide-list{
+    display: flex;
+    flex-direction: column;
+  }
+  .guide-item{
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .guide-item:last-child{ border-bottom: none; }
+  .guide-num{
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    color: var(--mint);
+    padding-top: 2px;
+  }
+  .guide-body h3{
+    font-family: var(--display);
+    font-size: 1.18rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .guide-body p{
+    font-size: 0.94rem;
+    color: var(--pine-soft);
+    margin: 0 0 10px;
+  }
+  .guide-body ul{
+    margin: 0 0 10px;
+    padding-left: 20px;
+    color: var(--pine-soft);
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+  .guide-body li{ margin-bottom: 4px; }
+  .guide-note{
+    background: var(--mist-dim);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: var(--pine-soft);
+    margin-top: 6px;
+  }
+  section.alt .guide-note{ background: var(--mist); }
+
+  /* ---------- Milestone badges ---------- */
+  .badge-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 860px){ .badge-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .badge-grid{ grid-template-columns: 1fr; } }
+  .badge-card{
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 22px;
+    text-align: center;
+  }
+  .badge-icon{ font-size: 2rem; margin-bottom: 10px; }
+  .badge-time{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ember);
+    margin-bottom: 8px;
+  }
+  .badge-card h4{
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .badge-card p{ font-size: 0.88rem; color: var(--pine-soft); margin: 0; }
+
+  /* ---------- Check-in widget ---------- */
+  .checkin-actions{
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .checkin-btn{
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(243,246,244,0.25);
+    cursor: pointer;
+    background: rgba(243,246,244,0.06);
+    color: var(--mist);
+  }
+  .checkin-btn.good{ background: var(--mint); color: #0E2620; border-color: var(--mint); }
+  .checkin-btn.good:hover{ background: #63b09b; }
+  .checkin-btn.slip:hover{ background: rgba(243,246,244,0.12); }
+  .checkin-log{
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+  .checkin-entry{
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: rgba(243,246,244,0.75);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(243,246,244,0.1);
+    padding-bottom: 6px;
+  }
+  .checkin-entry.slip-entry{ color: #E8B4A5; }
+  .checkin-empty{
+    font-size: 0.85rem;
+    color: rgba(243,246,244,0.4);
+    margin-top: 18px;
+  }
+
   /* ---------- Crisis strip ---------- */
   .crisis{
     background: var(--ember-soft);
@@ -468,13 +589,14 @@
   <div class="wrap nav">
     <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
     <ul class="nav-links">
-      <li><a href="#tracker">Your progress</a></li>
+      <li><a href="#guide">How to quit</a></li>
+      <li><a href="#checkin">Check in</a></li>
       <li><a href="#toolkit">Craving toolkit</a></li>
-      <li><a href="#timeline">Recovery timeline</a></li>
+      <li><a href="#milestones">Milestones</a></li>
       <li><a href="#stories">Stories</a></li>
 	  <li><a href="#articles">Articles</a></li>
     </ul>
-    <a href="#tracker" class="nav-cta">Start your quit</a>
+    <a href="#guide" class="nav-cta">Start your quit</a>
   </div>
 </header>
 
@@ -488,7 +610,7 @@
         <h1>The urge lasts about<br><em>three minutes.</em><br>Let's get through it.</h1>
         <p class="lede">Cravings peak fast and fade faster. This breathing pattern is built to outlast one — 4 seconds in, 4 seconds held, 4 seconds out, 4 seconds held. Start it the next time the pull hits.</p>
         <div class="hero-actions">
-          <a href="#tracker" class="btn btn-primary">Set your quit date →</a>
+          <a href="#guide" class="btn btn-primary">Build your quit plan →</a>
           <a href="#toolkit" class="btn btn-ghost">See the craving toolkit</a>
         </div>
       </div>
@@ -505,13 +627,145 @@
     </div>
   </section>
 
-  <!-- ============ TRACKER ============ -->
-  <section id="tracker" class="alt">
+  <!-- ============ HOW TO QUIT GUIDE ============ -->
+  <section id="guide" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Your progress</p>
-        <h2>Every hour without it is a number worth seeing.</h2>
-        <p>Enter your quit date and what you used to spend, and this updates as you sit here.</p>
+        <p class="eyebrow">Start here</p>
+        <h2>How to quit vaping</h2>
+        <p>A practical walkthrough, not just information. Work through these in order, or jump to the part you need right now.</p>
+      </div>
+
+      <div class="guide-list">
+
+        <div class="guide-item">
+          <div class="guide-num">01</div>
+          <div class="guide-body">
+            <h3>Make a quit plan</h3>
+            <ul>
+              <li>Pick a quit date — close enough to feel real, far enough to prepare.</li>
+              <li>Write down why you want to quit. Keep it somewhere you'll actually see it.</li>
+              <li>Decide whether you'll quit all at once or taper down gradually.</li>
+              <li>Identify your biggest triggers so they don't catch you off guard.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">02</div>
+          <div class="guide-body">
+            <h3>Know what withdrawal can feel like</h3>
+            <ul>
+              <li>Cravings</li>
+              <li>Irritability or mood changes</li>
+              <li>Trouble concentrating</li>
+              <li>Restlessness</li>
+              <li>Changes in sleep or appetite</li>
+            </ul>
+            <div class="guide-note">These symptoms are common and usually temporary — most people find they ease with time.</div>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">03</div>
+          <div class="guide-body">
+            <h3>Have a craving plan</h3>
+            <p>Something to actually do when a craving hits:</p>
+            <ul>
+              <li>Delay — wait a few minutes, the urge will pass.</li>
+              <li>Drink water.</li>
+              <li>Take slow breaths.</li>
+              <li>Go for a short walk or do something physical.</li>
+              <li>Keep your hands or mouth busy.</li>
+              <li>Distract yourself or reach out to someone supportive.</li>
+            </ul>
+            <p>The <a href="#toolkit">craving toolkit</a> below walks through each of these in more depth.</p>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">04</div>
+          <div class="guide-body">
+            <h3>Identify and avoid your triggers</h3>
+            <p>Common ones include:</p>
+            <ul>
+              <li>Stress</li>
+              <li>Alcohol or parties</li>
+              <li>Driving</li>
+              <li>Studying</li>
+              <li>Certain friends or social situations</li>
+              <li>Seeing or smelling someone else vaping</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">05</div>
+          <div class="guide-body">
+            <h3>Get support</h3>
+            <p>Tell friends or family you're quitting. Talk with a healthcare professional. Use a quitline or text-based program. Quitting is easier when you're not doing it alone.</p>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">06</div>
+          <div class="guide-body">
+            <h3>Nicotine replacement and medications</h3>
+            <p>Some people benefit from nicotine replacement therapy or prescription medications as part of quitting. This is health information, not a recommendation — talk with a healthcare professional about what's appropriate for you.</p>
+            <div class="guide-note">See a reputable source like <a href="https://www.smokefree.gov" target="_blank" rel="noopener">smokefree.gov</a> or your doctor before starting anything.</div>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">07</div>
+          <div class="guide-body">
+            <h3>What to do after a slip</h3>
+            <p>Vaping once doesn't mean you've failed. Figure out what triggered the slip, learn from it, and restart your quit attempt. Most people who quit successfully had at least one slip along the way.</p>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">08</div>
+          <div class="guide-body">
+            <h3>A simple day-by-day plan</h3>
+            <ul>
+              <li><strong>Before quitting</strong> — set your date, tell your support people, clear out your vapes and supplies.</li>
+              <li><strong>Quit day</strong> — remove temptation, keep busy, use your craving plan.</li>
+              <li><strong>First week</strong> — expect withdrawal to be at its toughest here. Lean on your support and toolkit.</li>
+              <li><strong>Weeks 2–4</strong> — cravings usually get shorter and less frequent. Keep track of what triggers you.</li>
+              <li><strong>Staying vape-free</strong> — stay alert to triggers, and have a plan ready if a craving catches you off guard.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">09</div>
+          <div class="guide-body">
+            <h3>Motivation and benefits</h3>
+            <p>People quit for their own mix of reasons — health, money, freedom from cravings, not having to carry a device everywhere. Keep your own reasons close; they'll matter most on the hard days.</p>
+          </div>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-num">10</div>
+          <div class="guide-body">
+            <h3>Emergency and high-risk situations</h3>
+            <p>If you experience concerning symptoms, seek medical help.</p>
+            <div class="guide-note">This site is a support tool, not a substitute for professional medical care.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHECK-IN ============ -->
+  <section id="checkin">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Every day counts</p>
+        <h2>Check in with yourself</h2>
+        <p>Set your quit date, then log how each day goes. A streak you can see is its own kind of motivation.</p>
       </div>
 
       <div class="tracker-card">
@@ -519,10 +773,6 @@
           <div class="field">
             <label for="quitDate">Quit date &amp; time</label>
             <input type="datetime-local" id="quitDate">
-          </div>
-          <div class="field">
-            <label for="weeklySpend">Spent per week on vapes ($)</label>
-            <input type="number" id="weeklySpend" placeholder="e.g. 35" min="0" step="1">
           </div>
           <button id="startTracking">Update</button>
         </div>
@@ -533,14 +783,20 @@
             <div class="label">Time since your last vape</div>
           </div>
           <div class="stat">
-            <div class="num" id="statMoney">$0.00</div>
-            <div class="label">Money kept</div>
+            <div class="num" id="statStreak">0</div>
+            <div class="label">Current craving-free streak</div>
           </div>
           <div class="stat">
-            <div class="num" id="statPuffs">0</div>
-            <div class="label">Estimated puffs not taken (avg. 1 pod ≈ 600 puffs/wk for a daily user)</div>
+            <div class="num" id="statCheckins">0</div>
+            <div class="label">Check-ins logged</div>
           </div>
         </div>
+
+        <div class="checkin-actions">
+          <button class="checkin-btn good" id="logGood">Craving-free today</button>
+          <button class="checkin-btn slip" id="logSlip">Had a slip</button>
+        </div>
+        <div class="checkin-log" id="checkinLog"></div>
 
         <p class="tracker-hint">This runs only in your browser right now — nothing is saved or sent anywhere. Wire it up to real storage before you ship it.</p>
       </div>
@@ -591,45 +847,51 @@
     </div>
   </section>
 
-  <!-- ============ TIMELINE ============ -->
-  <section id="timeline" class="alt">
+  <!-- ============ MILESTONES ============ -->
+  <section id="milestones" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">What's happening in your body</p>
-        <h2>Recovery starts faster than most people expect</h2>
-        <p>This is the general pattern most people experience after their last vape. Your timeline may vary.</p>
+        <p class="eyebrow">What you're earning</p>
+        <h2>Milestones worth marking</h2>
+        <p>Recovery starts faster than most people expect. These are the badges most people unlock after their last vape — your timeline may vary.</p>
       </div>
 
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-time">20 minutes</div>
-          <h4>Heart rate begins to settle</h4>
-          <p>The nicotine-driven spike in heart rate and blood pressure starts coming back down toward your normal range.</p>
+      <div class="badge-grid">
+        <div class="badge-card">
+          <div class="badge-icon">🌱</div>
+          <div class="badge-time">20 minutes</div>
+          <h4>First step</h4>
+          <p>Heart rate and blood pressure start settling back toward your normal range.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-time">12 hours</div>
-          <h4>Carbon monoxide levels normalize</h4>
-          <p>Oxygen carrying capacity in your blood improves as carbon monoxide from inhaled vapor clears out.</p>
+        <div class="badge-card">
+          <div class="badge-icon">🌤️</div>
+          <div class="badge-time">12 hours</div>
+          <h4>Clearer air</h4>
+          <p>Oxygen carrying capacity in your blood improves as carbon monoxide clears out.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-time">48–72 hours</div>
-          <h4>Nicotine is fully out of your system</h4>
-          <p>This is often the hardest stretch — cravings and irritability tend to peak here before they start to ease.</p>
+        <div class="badge-card">
+          <div class="badge-icon">💪</div>
+          <div class="badge-time">48–72 hours</div>
+          <h4>Toughest stretch, cleared</h4>
+          <p>Nicotine is fully out of your system. Cravings often peak here before they start to ease.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-time">1–2 weeks</div>
-          <h4>Circulation and taste sharpen</h4>
-          <p>Blood flow improves, and your senses of taste and smell — often dulled by regular use — start coming back.</p>
+        <div class="badge-card">
+          <div class="badge-icon">👃</div>
+          <div class="badge-time">1–2 weeks</div>
+          <h4>Senses sharpening</h4>
+          <p>Circulation improves, and taste and smell — often dulled by regular use — start coming back.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-time">1 month</div>
-          <h4>Breathing feels easier</h4>
-          <p>Lung function keeps improving and coughing or shortness of breath from irritated airways continues to fade.</p>
+        <div class="badge-card">
+          <div class="badge-icon">🫁</div>
+          <div class="badge-time">1 month</div>
+          <h4>Breathing easier</h4>
+          <p>Lung function keeps improving as coughing or shortness of breath continues to fade.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-time">1 year</div>
-          <h4>Cravings become rare</h4>
-          <p>Most people find the urge shows up far less often, and far less intensely, than it did in the first weeks.</p>
+        <div class="badge-card">
+          <div class="badge-icon">🏆</div>
+          <div class="badge-time">1 year</div>
+          <h4>Rare urge</h4>
+          <p>Most people find cravings show up far less often, and far less intensely, than they did early on.</p>
         </div>
       </div>
     </div>
@@ -820,9 +1082,10 @@ div.desc {
       <p class="small">A template for a quit-vaping support site. Replace this copy, wire the tracker to real storage, and make it yours.</p>
     </div>
     <ul class="footer-links">
-      <li><a href="#tracker">Progress</a></li>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#checkin">Check in</a></li>
       <li><a href="#toolkit">Toolkit</a></li>
-      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#milestones">Milestones</a></li>
     </ul>
   </div>
 </footer>
@@ -907,52 +1170,89 @@ div.desc {
     breathing ? stopBreathing(false) : startBreathing();
   });
 
-  // ---------- Progress tracker ----------
+  // ---------- Check-in widget ----------
   const quitDateInput = document.getElementById('quitDate');
-  const weeklySpendInput = document.getElementById('weeklySpend');
   const startTrackingBtn = document.getElementById('startTracking');
   const statTime = document.getElementById('statTime');
-  const statMoney = document.getElementById('statMoney');
-  const statPuffs = document.getElementById('statPuffs');
+  const statStreak = document.getElementById('statStreak');
+  const statCheckins = document.getElementById('statCheckins');
+  const logGoodBtn = document.getElementById('logGood');
+  const logSlipBtn = document.getElementById('logSlip');
+  const checkinLog = document.getElementById('checkinLog');
 
   let quitDate = null;
-  let weeklySpend = 0;
   let tickId = null;
+  // Session-only log: { good: boolean, at: Date }. Newest first.
+  let entries = [];
 
-  function updateStats(){
+  function updateTime(){
     if(!quitDate){
       statTime.textContent = '0d 0h 0m';
-      statMoney.textContent = '$0.00';
-      statPuffs.textContent = '0';
       return;
     }
     const now = new Date();
     let diffMs = now - quitDate;
     if(diffMs < 0) diffMs = 0;
-
     const minutes = Math.floor(diffMs / 60000);
     const days = Math.floor(minutes / 1440);
     const hours = Math.floor((minutes % 1440) / 60);
     const mins = minutes % 60;
     statTime.textContent = `${days}d ${hours}h ${mins}m`;
+  }
 
-    const weeksElapsed = diffMs / (1000 * 60 * 60 * 24 * 7);
-    const moneySaved = weeksElapsed * weeklySpend;
-    statMoney.textContent = `$${moneySaved.toFixed(2)}`;
+  function currentStreak(){
+    let streak = 0;
+    for(const entry of entries){
+      if(entry.good) streak++;
+      else break;
+    }
+    return streak;
+  }
 
-    const puffsPerWeek = 600;
-    const puffs = Math.round(weeksElapsed * puffsPerWeek);
-    statPuffs.textContent = puffs.toLocaleString();
+  function renderCheckins(){
+    statStreak.textContent = currentStreak();
+    statCheckins.textContent = entries.length;
+
+    checkinLog.innerHTML = '';
+    if(entries.length === 0){
+      const empty = document.createElement('div');
+      empty.className = 'checkin-empty';
+      empty.textContent = 'No check-ins logged yet today or any day — tap a button above to start.';
+      checkinLog.appendChild(empty);
+      return;
+    }
+    entries.slice(0, 10).forEach(entry => {
+      const row = document.createElement('div');
+      row.className = 'checkin-entry' + (entry.good ? '' : ' slip-entry');
+      const dateStr = entry.at.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      const timeStr = entry.at.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      row.innerHTML = `<span>${dateStr}, ${timeStr}</span><span>${entry.good ? 'Craving-free' : 'Had a slip'}</span>`;
+      checkinLog.appendChild(row);
+    });
+  }
+
+  function updateStats(){
+    updateTime();
+    renderCheckins();
   }
 
   startTrackingBtn.addEventListener('click', () => {
     if(quitDateInput.value){
       quitDate = new Date(quitDateInput.value);
     }
-    weeklySpend = parseFloat(weeklySpendInput.value) || 0;
     if(tickId) clearInterval(tickId);
     updateStats();
-    tickId = setInterval(updateStats, 1000 * 30);
+    tickId = setInterval(updateTime, 1000 * 30);
+  });
+
+  logGoodBtn.addEventListener('click', () => {
+    entries.unshift({ good: true, at: new Date() });
+    renderCheckins();
+  });
+
+  logSlipBtn.addEventListener('click', () => {
+    entries.unshift({ good: false, at: new Date() });
+    renderCheckins();
   });
 
   // ---------- Video carousel ----------
