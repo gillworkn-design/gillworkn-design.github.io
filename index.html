@@ -264,6 +264,7 @@
     height: 41px;
   }
   .tracker-setup button:hover{ background: #63b09b; }
+  .tracker-setup button:disabled{ opacity: 0.6; cursor: default; }
 
   .stat-grid{
     display: grid;
@@ -526,6 +527,7 @@
   .checkin-btn.good{ background: var(--mint); color: #0E2620; border-color: var(--mint); }
   .checkin-btn.good:hover{ background: #63b09b; }
   .checkin-btn.slip:hover{ background: rgba(243,246,244,0.12); }
+  .checkin-btn:disabled{ opacity: 0.5; cursor: default; }
   .checkin-log{
     margin-top: 22px;
     display: flex;
@@ -567,6 +569,102 @@
   .crisis a.btn{ background: var(--ember); color: var(--mist); white-space: nowrap; }
   .crisis a.btn:hover{ background: #a5402f; }
 
+.crisis {
+  background: var(--ember-soft);
+    border: 1px solid #7c3aed;
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .crisis p{ margin: 0; font-size: 0.95rem; color: #7A2E1F; max-width: 56ch; }
+  .crisis strong{ font-weight: 700; }
+  .crisis a.btn{ background: var(--ember); color: var(--mist); white-space: nowrap; }
+  .crisis a.btn:hover{ background: #a5402f; }
+
+.purple-crisis {
+  background: #7c3aed;
+  color: white;
+}
+
+
+  /* ---------- Articles / resources grid ---------- */
+  .article-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 860px){ .article-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px){ .article-grid{ grid-template-columns: 1fr; } }
+  .article-card{
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--pine);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .article-card:hover{
+    border-color: var(--mint);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(22,48,43,0.09);
+  }
+  .article-thumb{
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    background: var(--mist-dim);
+    overflow: hidden;
+  }
+  .article-thumb img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .article-body{
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .article-tag{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .article-card h3{
+    font-family: var(--display);
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .article-card p{
+    font-size: 0.88rem;
+    color: var(--pine-soft);
+    margin: 0;
+    flex: 1;
+  }
+  .article-source{
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pine-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .article-source .arrow{ transition: transform 0.15s; }
+  .article-card:hover .article-source .arrow{ transform: translateX(3px); }
+
   /* ---------- Footer ---------- */
   footer{
     padding: 48px 0 60px;
@@ -589,7 +687,7 @@
   <div class="wrap nav">
     <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
     <ul class="nav-links">
-      <li><a href="#guide">How to quit</a></li>
+      <li><a href="#guide">What to expect</a></li>
       <li><a href="#checkin">Check in</a></li>
       <li><a href="#toolkit">Craving toolkit</a></li>
       <li><a href="#milestones">Milestones</a></li>
@@ -607,10 +705,11 @@
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Quitting vaping</p>
-        <h1>The urge lasts about<br><em>three minutes.</em><br>Let's get through it.</h1>
-        <p class="lede">Cravings peak fast and fade faster. This breathing pattern is built to outlast one — 4 seconds in, 4 seconds held, 4 seconds out, 4 seconds held. Start it the next time the pull hits.</p>
+        <h1>The cravings aren't<br><em>life worthy.</em><br>Let's get through it.</h1>
+        <p class="lede">Quitting vaping can feel difficult, but you don't have to do it alone. Learn how vaping affects you, understand your cravings, and discover practical ways to break the habit. Explore the tools and information to help you take control and move forward.
+</p>
         <div class="hero-actions">
-          <a href="#guide" class="btn btn-primary">Build your quit plan →</a>
+          <a href="#guide" class="btn btn-primary">See what to expect →</a>
           <a href="#toolkit" class="btn btn-ghost">See the craving toolkit</a>
         </div>
       </div>
@@ -631,9 +730,9 @@
   <section id="guide" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Start here</p>
-        <h2>How to quit vaping</h2>
-        <p>A practical walkthrough, not just information. Work through these in order, or jump to the part you need right now.</p>
+        <p class="eyebrow">Best Match</p>
+        <h2>What to expect when quiting vaping</h2>
+        <p>A clear guide to what quitting looks like. Learn what to expect, how to handle cravings, and where to find support along the way.</p>
       </div>
 
       <div class="guide-list">
@@ -751,7 +850,7 @@
           <div class="guide-body">
             <h3>Emergency and high-risk situations</h3>
             <p>If you experience concerning symptoms, seek medical help.</p>
-            <div class="guide-note">This site is a support tool, not a substitute for professional medical care.</div>
+            <div class="guide-note">This site is a support tool, please do not use this website for all of your medical information.</div>
           </div>
         </div>
 
@@ -798,7 +897,7 @@
         </div>
         <div class="checkin-log" id="checkinLog"></div>
 
-        <p class="tracker-hint">This runs only in your browser right now — nothing is saved or sent anywhere. Wire it up to real storage before you ship it.</p>
+        <p class="tracker-hint" id="trackerHint">Loading your saved progress…</p>
       </div>
     </div>
   </section>
@@ -927,141 +1026,92 @@
     </div>
   </section>
 
-
-<section>
-<style>
-div.gallery {
-  border: 1px solid #ccc;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
-<section id="articles">
+  <!-- ============ ARTICLES / RESOURCES ============ -->
+  <section id="articles" class="alt">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Need more help?</p>
         <h2>Articles and information</h2>
-		<p>More information about quiting and the side effects of vaping </p>
+        <p>Trusted reading on quitting vaping, withdrawal, and what it does to your body — for whenever you want to go deeper.</p>
       </div>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
 
+      <div class="article-grid">
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_forest.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Forest" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
+        <a class="article-card" href="https://smokefree.gov/quit-vaping" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=700&q=80" alt="Person looking out a window, reflecting">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Getting started</span>
+            <h3>How to quit vaping</h3>
+            <p>Smokefree.gov's step-by-step plan for setting a quit date, handling triggers, and getting through the first hard days.</p>
+            <span class="article-source">smokefree.gov <span class="arrow">→</span></span>
+          </div>
+        </a>
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_lights.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Northern Lights" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
+        <a class="article-card" href="https://www.cdc.gov/tobacco/e-cigarettes/index.html" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=700&q=80" alt="Close-up of lungs illustration on a chalkboard">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Health effects</span>
+            <h3>What vaping does to your body</h3>
+            <p>The CDC's plain-language rundown of what's in e-cigarette aerosol and how nicotine affects the body over time.</p>
+            <span class="article-source">cdc.gov <span class="arrow">→</span></span>
+          </div>
+        </a>
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
-<br>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
+        <a class="article-card" href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=700&q=80" alt="Two people talking over coffee">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Support</span>
+            <h3>Free, confidential helplines</h3>
+            <p>SAMHSA's national helpline connects you with local support, day or night, if you want to talk to someone right now.</p>
+            <span class="article-source">samhsa.gov <span class="arrow">→</span></span>
+          </div>
+        </a>
 
+        <a class="article-card" href="https://www.nhlbi.nih.gov/health/vaping" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1600959907703-125ba1374a12?auto=format&fit=crop&w=700&q=80" alt="Person breathing fresh air outdoors in a park">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Lung health</span>
+            <h3>Vaping and your lungs</h3>
+            <p>NIH's overview of how vaping affects lung function, and what tends to improve after your last vape.</p>
+            <span class="article-source">nhlbi.nih.gov <span class="arrow">→</span></span>
+          </div>
+        </a>
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_forest.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Forest" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
+        <a class="article-card" href="https://truthinitiative.org/research-resources/emerging-tobacco-products/how-quit-vaping" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?auto=format&fit=crop&w=700&q=80" alt="Young person sitting outside with a journal">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">For teens &amp; young adults</span>
+            <h3>Quitting vaping as a young person</h3>
+            <p>Truth Initiative's This Is Quitting program, built specifically for teens and young adults who vape.</p>
+            <span class="article-source">truthinitiative.org <span class="arrow">→</span></span>
+          </div>
+        </a>
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_lights.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Northern Lights" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
+        <a class="article-card" href="https://www.lung.org/quit-smoking/e-cigarettes-vaping/how-to-quit-vaping" target="_blank" rel="noopener">
+          <div class="article-thumb">
+            <img src="https://images.unsplash.com/photo-1476611317561-60117649dd94?auto=format&fit=crop&w=700&q=80" alt="Sunrise over hills, a fresh start">
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Staying quit</span>
+            <h3>Coping with slip-ups</h3>
+            <p>The American Lung Association on why relapses happen, and how to get back on track without starting over.</p>
+            <span class="article-source">lung.org <span class="arrow">→</span></span>
+          </div>
+        </a>
 
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="img_mountains.jpg">
-      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80" alt="Mountains" width="600" height="400">
-    </a>
-    <div class="desc">Add a description of the image here</div>
-  </div>
-</div>
-<div class="clearfix"></div>
-
-</section>
-
-
+      </div>
+    </div>
+  </section>
 
   <!-- ============ CRISIS / SUPPORT ============ -->
   <section>
@@ -1071,8 +1121,14 @@ div.desc {
         <p>Call 1-800-QUIT-NOW</p>
       </div>
     </div>
+	<br>
+    <div class="wrap">
+      <div class="crisis">
+        <p><strong>Feeling down, hopeless, or depressed?</strong> Free, confidential support is free all day everyday.</p>
+        <p>Call 988</p>
+      </div>
+    </div>
   </section>
-
 </main>
 
 <footer>
@@ -1082,27 +1138,15 @@ div.desc {
       <p class="small">A template for a quit-vaping support site. Replace this copy, wire the tracker to real storage, and make it yours.</p>
     </div>
     <ul class="footer-links">
-      <li><a href="#guide">Guide</a></li>
+      <li><a href="#guide">What to expect</a></li>
       <li><a href="#checkin">Check in</a></li>
-      <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#toolkit">Craving toolkit</a></li>
       <li><a href="#milestones">Milestones</a></li>
+      <li><a href="#stories">Stories</a></li>
+	  <li><a href="#articles">Articles</a></li>
     </ul>
   </div>
 </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script>
   // ---------- Breathing tool ----------
@@ -1170,7 +1214,7 @@ div.desc {
     breathing ? stopBreathing(false) : startBreathing();
   });
 
-  // ---------- Check-in widget ----------
+  // ---------- Check-in widget (persisted with localStorage) ----------
   const quitDateInput = document.getElementById('quitDate');
   const startTrackingBtn = document.getElementById('startTracking');
   const statTime = document.getElementById('statTime');
@@ -1179,11 +1223,27 @@ div.desc {
   const logGoodBtn = document.getElementById('logGood');
   const logSlipBtn = document.getElementById('logSlip');
   const checkinLog = document.getElementById('checkinLog');
+  const trackerHint = document.getElementById('trackerHint');
+
+  const STORAGE_KEY_QUITDATE = 'clearing:quit-date';
+  const STORAGE_KEY_ENTRIES = 'clearing:checkin-entries';
 
   let quitDate = null;
   let tickId = null;
-  // Session-only log: { good: boolean, at: Date }. Newest first.
+  // Persisted log: { good: boolean, at: ISOString }. Newest first.
   let entries = [];
+  let storageAvailable = true;
+
+  function storageWorks(){
+    try{
+      const testKey = '__clearing_test__';
+      window.localStorage.setItem(testKey, '1');
+      window.localStorage.removeItem(testKey);
+      return true;
+    } catch(err){
+      return false;
+    }
+  }
 
   function updateTime(){
     if(!quitDate){
@@ -1217,15 +1277,16 @@ div.desc {
     if(entries.length === 0){
       const empty = document.createElement('div');
       empty.className = 'checkin-empty';
-      empty.textContent = 'No check-ins logged yet today or any day — tap a button above to start.';
+      empty.textContent = 'No check-ins logged yet — tap a button above to start.';
       checkinLog.appendChild(empty);
       return;
     }
     entries.slice(0, 10).forEach(entry => {
       const row = document.createElement('div');
       row.className = 'checkin-entry' + (entry.good ? '' : ' slip-entry');
-      const dateStr = entry.at.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      const timeStr = entry.at.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      const atDate = new Date(entry.at);
+      const dateStr = atDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      const timeStr = atDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
       row.innerHTML = `<span>${dateStr}, ${timeStr}</span><span>${entry.good ? 'Craving-free' : 'Had a slip'}</span>`;
       checkinLog.appendChild(row);
     });
@@ -1236,24 +1297,97 @@ div.desc {
     renderCheckins();
   }
 
+  function saveQuitDate(){
+    if(!storageAvailable) return;
+    try{
+      window.localStorage.setItem(STORAGE_KEY_QUITDATE, quitDate ? quitDate.toISOString() : '');
+    } catch(err){
+      console.error('Failed to save quit date:', err);
+    }
+  }
+
+  function saveEntries(){
+    if(!storageAvailable) return;
+    try{
+      window.localStorage.setItem(STORAGE_KEY_ENTRIES, JSON.stringify(entries));
+    } catch(err){
+      console.error('Failed to save check-ins:', err);
+    }
+  }
+
+  function loadSavedState(){
+    storageAvailable = storageWorks();
+
+    if(!storageAvailable){
+      trackerHint.textContent = 'Your browser is blocking saved progress (private browsing or storage is disabled) — this session won\u2019t persist after refresh.';
+      setDefaultDateIfEmpty();
+      updateStats();
+      return;
+    }
+
+    // Load quit date
+    try{
+      const saved = window.localStorage.getItem(STORAGE_KEY_QUITDATE);
+      if(saved){
+        quitDate = new Date(saved);
+        quitDateInput.value = toLocalInputValue(quitDate);
+      } else {
+        setDefaultDateIfEmpty();
+      }
+    } catch(err){
+      setDefaultDateIfEmpty();
+    }
+
+    // Load check-in entries
+    try{
+      const saved = window.localStorage.getItem(STORAGE_KEY_ENTRIES);
+      if(saved){
+        entries = JSON.parse(saved);
+      }
+    } catch(err){
+      entries = [];
+    }
+
+    trackerHint.textContent = 'Your quit date and check-ins are saved automatically in this browser, and will still be here after you refresh.';
+    updateStats();
+    if(tickId) clearInterval(tickId);
+    tickId = setInterval(updateTime, 1000 * 30);
+  }
+
+  function toLocalInputValue(date){
+    const local = new Date(date);
+    local.setMinutes(local.getMinutes() - local.getTimezoneOffset());
+    return local.toISOString().slice(0,16);
+  }
+
+  function setDefaultDateIfEmpty(){
+    if(quitDateInput.value) return;
+    quitDateInput.value = toLocalInputValue(new Date());
+  }
+
   startTrackingBtn.addEventListener('click', () => {
     if(quitDateInput.value){
       quitDate = new Date(quitDateInput.value);
     }
+    saveQuitDate();
     if(tickId) clearInterval(tickId);
     updateStats();
     tickId = setInterval(updateTime, 1000 * 30);
   });
 
   logGoodBtn.addEventListener('click', () => {
-    entries.unshift({ good: true, at: new Date() });
+    entries.unshift({ good: true, at: new Date().toISOString() });
     renderCheckins();
+    saveEntries();
   });
 
   logSlipBtn.addEventListener('click', () => {
-    entries.unshift({ good: false, at: new Date() });
+    entries.unshift({ good: false, at: new Date().toISOString() });
     renderCheckins();
+    saveEntries();
   });
+
+  loadSavedState();
 
   // ---------- Video carousel ----------
   // Add your own videos here. Two supported shapes:
@@ -1348,13 +1482,6 @@ div.desc {
   });
 
   renderCarousel();
-
-  // Default the datetime input to "now" for convenience
-  (function setDefaultDate(){
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    quitDateInput.value = now.toISOString().slice(0,16);
-  })();
 </script>
 
 </body>
