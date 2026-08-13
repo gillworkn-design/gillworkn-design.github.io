@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clearing — Quit vaping, one breath at a time</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<title>Breathline — Quit vaping, one breath at a time</title>
+<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/gillworkn-design/gillworkn-design.github.io/1f579a4d4de3144893fad7367c3e70dcefab94d6/Breathlinelogo.png.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -265,6 +265,13 @@
   }
   .tracker-setup button:hover{ background: #63b09b; }
   .tracker-setup button:disabled{ opacity: 0.6; cursor: default; }
+
+  .tracker-setup button.reset-btn{
+    background: transparent;
+    color: var(--mist);
+    border: 1px solid rgba(243,246,244,0.35);
+  }
+  .tracker-setup button.reset-btn:hover{ background: rgba(243,246,244,0.1); }
 
   .stat-grid{
     display: grid;
@@ -664,7 +671,14 @@
   }
   .article-source .arrow{ transition: transform 0.15s; }
   .article-card:hover .article-source .arrow{ transform: translateX(3px); }
-
+  
+.breath-toggle {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  /* keep whatever padding, background, border-radius, font styles
+     your existing .breath-toggle button rule already has */
+}
   /* ---------- Footer ---------- */
   footer{
     padding: 48px 0 60px;
@@ -685,7 +699,7 @@
 
 <header class="site">
   <div class="wrap nav">
-    <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
+    <a href="#top" class="wordmark"><span class="dot"></span>Breathline</a>
     <ul class="nav-links">
       <li><a href="#guide">What to expect</a></li>
       <li><a href="#checkin">Check in</a></li>
@@ -713,17 +727,14 @@
           <a href="#toolkit" class="btn btn-ghost">See the craving toolkit</a>
         </div>
       </div>
-
       <div class="breath-card">
-        <div class="breath-stage" id="breathStage">Ready when you are</div>
-        <div class="breath-ring-wrap">
-          <svg viewBox="0 0 220 220"><circle class="breath-track" cx="110" cy="110" r="95"/></svg>
-          <div class="breath-orb" id="breathOrb"></div>
-        </div>
-        <p class="breath-label" id="breathLabel">4 rounds of box breathing — about a minute</p>
-        <button class="breath-toggle" id="breathToggle">Start breathing</button>
-      </div>
-    </div>
+  <div class="breath-stage" id="breathStage">Craving now?</div>
+  <div class="breath-ring-wrap">
+    <div class="breath-orb" id="breathOrb"></div>
+  </div>
+  <p class="breath-label" id="breathLabel">Craving right now? Get a guided breathing exercise.</p>
+  <a class="breath-toggle" id="breathToggle" href="https://smokefree.gov/challenges-when-quitting/cravings-triggers" target="_blank" rel="noopener" role="button">Start breathing →</a>
+</div>
   </section>
 
   <!-- ============ HOW TO QUIT GUIDE ============ -->
@@ -874,6 +885,7 @@
             <input type="datetime-local" id="quitDate">
           </div>
           <button id="startTracking">Update</button>
+          <button id="resetTracker" class="reset-btn" type="button">Reset progress</button>
         </div>
 
         <div class="stat-grid">
@@ -1134,7 +1146,7 @@
 <footer>
   <div class="wrap footer-grid">
     <div>
-      <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
+      <a href="#top" class="wordmark"><span class="dot"></span>Breathline</a>
       <p class="small">A template for a quit-vaping support site. Replace this copy, wire the tracker to real storage, and make it yours.</p>
     </div>
     <ul class="footer-links">
@@ -1149,74 +1161,11 @@
 </footer>
 
 <script>
-  // ---------- Breathing tool ----------
-  const orb = document.getElementById('breathOrb');
-  const stage = document.getElementById('breathStage');
-  const toggleBtn = document.getElementById('breathToggle');
-  const breathLabel = document.getElementById('breathLabel');
-
-  const PHASES = [
-    { name: 'Breathe in', cls: 'expand', duration: 4000 },
-    { name: 'Hold',       cls: 'hold',   duration: 4000 },
-    { name: 'Breathe out', cls: 'shrink', duration: 4000 },
-    { name: 'Hold',       cls: 'hold',   duration: 4000 }
-  ];
-  let breathing = false;
-  let phaseIndex = 0;
-  let round = 0;
-  const TOTAL_ROUNDS = 4;
-  let timeoutId = null;
-
-  function runPhase(){
-    if(!breathing) return;
-    const phase = PHASES[phaseIndex];
-    orb.classList.remove('expand','hold','shrink');
-    void orb.offsetWidth; // restart animation
-    orb.classList.add(phase.cls);
-    stage.textContent = phase.name;
-
-    timeoutId = setTimeout(() => {
-      phaseIndex++;
-      if(phaseIndex >= PHASES.length){
-        phaseIndex = 0;
-        round++;
-        if(round >= TOTAL_ROUNDS){
-          stopBreathing(true);
-          return;
-        }
-      }
-      runPhase();
-    }, phase.duration);
-  }
-
-  function startBreathing(){
-    breathing = true;
-    phaseIndex = 0;
-    round = 0;
-    toggleBtn.textContent = 'Stop';
-    breathLabel.textContent = 'Follow the circle — breathe with it';
-    runPhase();
-  }
-
-  function stopBreathing(finished){
-    breathing = false;
-    clearTimeout(timeoutId);
-    orb.classList.remove('expand','hold');
-    orb.classList.add('shrink');
-    toggleBtn.textContent = 'Start breathing';
-    stage.textContent = finished ? 'Nicely done' : 'Ready when you are';
-    breathLabel.textContent = finished
-      ? 'How does the urge feel now? Go again if it helps.'
-      : '4 rounds of box breathing — about a minute';
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    breathing ? stopBreathing(false) : startBreathing();
-  });
 
   // ---------- Check-in widget (persisted with localStorage) ----------
   const quitDateInput = document.getElementById('quitDate');
   const startTrackingBtn = document.getElementById('startTracking');
+  const resetTrackerBtn = document.getElementById('resetTracker');
   const statTime = document.getElementById('statTime');
   const statStreak = document.getElementById('statStreak');
   const statCheckins = document.getElementById('statCheckins');
@@ -1373,6 +1322,31 @@
     if(tickId) clearInterval(tickId);
     updateStats();
     tickId = setInterval(updateTime, 1000 * 30);
+  });
+
+  resetTrackerBtn.addEventListener('click', () => {
+    const confirmed = window.confirm('Reset all progress? This clears your quit date and every check-in you\u2019ve logged in this browser. This can\u2019t be undone.');
+    if(!confirmed) return;
+
+    quitDate = null;
+    entries = [];
+
+    if(storageAvailable){
+      try{
+        window.localStorage.removeItem(STORAGE_KEY_QUITDATE);
+        window.localStorage.removeItem(STORAGE_KEY_ENTRIES);
+      } catch(err){
+        console.error('Failed to clear saved progress:', err);
+      }
+    }
+
+    setDefaultDateIfEmpty();
+    if(tickId) clearInterval(tickId);
+    updateStats();
+    tickId = setInterval(updateTime, 1000 * 30);
+    trackerHint.textContent = storageAvailable
+      ? 'Progress reset. Set a new quit date whenever you\u2019re ready.'
+      : 'Progress reset for this session.';
   });
 
   logGoodBtn.addEventListener('click', () => {
