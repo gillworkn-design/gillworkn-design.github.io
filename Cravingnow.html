@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --mist: #F3F6F4;
+      --mist-dim: #E8EDE9;
+      --pine: #16302B;
+      --pine-soft: #3E5A54;
+      --ember: #C1503C;
+      --ember-soft: #E8CDC5;
+      --mint: #4E9C86;
+      --mint-soft: #D8EBE4;
+      --line: #D3DBD6;
+      --white: #FFFFFF;
+      --display: 'Fraunces', serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+      background: transparent;
+    }
+    html::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: transparent;
+    }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      line-height: 1.55;
+      background: transparent;
+      color: var(--pine);
+      -webkit-font-smoothing: antialiased;
+      min-height: 92vh;
+      max-width: 1180px;
+      margin: 4vh auto;
+      border: 1px solid rgba(211,219,214,0.95);
+      border-radius: 22px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-shadow: 0 28px 90px rgba(0,0,0,0.34);
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(243,246,244,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+    .wordmark {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .wordmark .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--mint);
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--pine-soft);
+    }
+    .nav-links a:hover { color: var(--pine); }
+    .nav-cta {
+      font-size: 0.88rem;
+      font-weight: 600;
+      background: var(--pine);
+      color: var(--mist);
+      padding: 9px 16px;
+      border-radius: 100px;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 72px 0 88px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin: 0 0 16px;
+    }
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 22px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--mint);
+    }
+    .hero p.lede {
+      font-size: 1.12rem;
+      color: var(--pine-soft);
+      max-width: 46ch;
+      margin: 0 0 32px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--pine); color: var(--mist); }
+    .btn-primary:hover { background: #0e211d; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--pine);
+      border: 1.5px solid var(--line);
+    }
+    .btn-ghost:hover { border-color: var(--pine-soft); }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 12px 28px rgba(22,48,43,0.04);
+    }
+    .mini-stat {
+      font-family: var(--mono);
+      color: var(--mint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      margin-bottom: 18px;
+    }
+    .mini-box {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .mini-box .item {
+      background: var(--mist);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 14px;
+    }
+    .mini-box .num {
+      display: block;
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+      color: var(--pine);
+    }
+    .mini-box .label {
+      font-size: 0.82rem;
+      color: var(--pine-soft);
+    }
+
+    section { padding: 76px 0; }
+    section.alt {
+      background: var(--white);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-head { max-width: 62ch; margin-bottom: 44px; }
+    .section-head .eyebrow { margin-bottom: 12px; }
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+    }
+    .section-head p { color: var(--pine-soft); font-size: 1.02rem; margin: 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .info-card {
+      background: var(--mist);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+    }
+    .info-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--mint-soft);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+    }
+    .info-card h3 {
+      font-family: var(--display);
+      font-size: 1.14rem;
+      margin: 0 0 8px;
+    }
+    .info-card p {
+      color: var(--pine-soft);
+      margin: 0;
+      font-size: 0.92rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .list-panel,
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+    }
+    .list-panel ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--pine-soft);
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+    .stat-stack {
+      display: grid;
+      gap: 16px;
+    }
+    .metric {
+      padding: 22px 18px;
+      background: var(--mist);
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    .metric .num {
+      font-family: var(--mono);
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
+      color: var(--mint);
+      display: block;
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+    .metric .label { color: var(--pine-soft); font-size: 0.88rem; }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .article-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--pine);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .article-card:hover {
+      border-color: var(--mint);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(22,48,43,0.09);
+    }
+    .article-thumb {
+      aspect-ratio: 16 / 10;
+      width: 100%;
+      background: var(--mist-dim);
+      overflow: hidden;
+    }
+    .article-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .article-body {
+      padding: 20px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .article-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--mint);
+    }
+    .article-card h3 {
+      font-family: var(--display);
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .article-card p {
+      font-size: 0.88rem;
+      color: var(--pine-soft);
+      margin: 0;
+      flex: 1;
+    }
+    .article-source {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--pine-soft);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    footer {
+      padding: 48px 0 60px;
+      border-top: 1px solid var(--line);
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    footer p.small {
+      font-size: 0.85rem;
+      color: var(--pine-soft);
+      max-width: 44ch;
+      margin: 0;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      text-decoration: none;
+      color: var(--pine-soft);
+    }
+    .footer-links a:hover { color: var(--pine); }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .split,
+      .card-grid,
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 560px) {
+      body {
+        min-height: 100vh;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+      }
+      .mini-box { grid-template-columns: 1fr; }
+      .hero { padding-top: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
+      <ul class="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+      <a href="#overview" class="nav-cta">Get started</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Untitled page</p>
+          <h1>Small steps, <em>clearer days</em>, and a calmer rhythm.</h1>
+          <p class="lede">This page is designed for focus, clarity, and momentum. Use it as a starting point for a project, story, campaign, or personal reset — all within the same calm brand system used across the site.</p>
+          <div class="hero-actions">
+            <a href="#overview" class="btn btn-primary">See the overview →</a>
+            <a href="#features" class="btn btn-ghost">Explore features</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="mini-stat">Progress snapshot</div>
+          <h2 style="margin:0 0 8px; font-size: clamp(1.7rem, 2vw, 2.3rem);">A calmer way to move forward.</h2>
+          <p style="margin:0; color: var(--pine-soft);">Build trust by making the next step feel simple, human, and achievable.</p>
+
+          <div class="mini-box">
+            <div class="item">
+              <span class="num">24</span>
+              <span class="label">Daily wins</span>
+            </div>
+            <div class="item">
+              <span class="num">4.8</span>
+              <span class="label">Focus score</span>
+            </div>
+            <div class="item">
+              <span class="num">12</span>
+              <span class="label">Reset tools</span>
+            </div>
+            <div class="item">
+              <span class="num">1</span>
+              <span class="label">Clear next step</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Overview</p>
+          <h2>Built for clarity and momentum</h2>
+          <p>Use this untitled page as a clean foundation for a story, a landing section, or a focused concept page that needs a calm, well-structured narrative.</p>
+        </div>
+
+        <div class="split">
+          <div class="list-panel">
+            <h3 style="font-family: var(--display); font-size: 1.4rem; margin-top: 0; margin-bottom: 12px;">What this layout helps with</h3>
+            <ul>
+              <li>Introduces a central idea in a clear, readable way.</li>
+              <li>Builds trust with calm typography and simple visual rhythm.</li>
+              <li>Creates space for action without feeling crowded.</li>
+              <li>Works well for mission-driven, wellness, or product storytelling.</li>
+            </ul>
+          </div>
+
+          <div class="stat-stack">
+            <div class="metric">
+              <span class="num">01</span>
+              <span class="label">Set the tone with a steady headline and a simple promise.</span>
+            </div>
+            <div class="metric">
+              <span class="num">02</span>
+              <span class="label">Give readers a clear next action without overwhelming them.</span>
+            </div>
+            <div class="metric">
+              <span class="num">03</span>
+              <span class="label">Use supportive details to keep the journey approachable.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Features</p>
+          <h2>Simple, thoughtful building blocks</h2>
+          <p>Every section uses the same visual language so the page feels consistent, dependable, and easy to build from.</p>
+        </div>
+
+        <div class="card-grid">
+          <div class="info-card">
+            <div class="icon">✦</div>
+            <h3>Clear hierarchy</h3>
+            <p>Readable headlines, restrained spacing, and a strong content rhythm make the page feel thoughtful from the first glance.</p>
+          </div>
+          <div class="info-card">
+            <div class="icon">▣</div>
+            <h3>Calm structure</h3>
+            <p>Cards, sections, and lists create a clear path without chasing attention with noise or clutter.</p>
+          </div>
+          <div class="info-card">
+            <div class="icon">✓</div>
+            <h3>Actionable flow</h3>
+            <p>Buttons and callouts guide people toward the next move while still preserving a lower-pressure tone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights" class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Insights</p>
+          <h2>Why this design works</h2>
+          <p>It balances clarity with warmth, which is ideal for support-focused content and personal or mission-driven brands.</p>
+        </div>
+
+        <div class="split">
+          <div class="panel">
+            <h3 style="font-family: var(--display); font-size: 1.5rem; margin-top: 0; margin-bottom: 14px;">A better reading experience</h3>
+            <p style="margin:0; color: var(--pine-soft);">The page uses ample white space, a limited palette, and consistent card layout to reduce friction. People can scan quickly, and still stay oriented.</p>
+          </div>
+
+          <div class="panel">
+            <h3 style="font-family: var(--display); font-size: 1.5rem; margin-top: 0; margin-bottom: 14px;">More than decoration</h3>
+            <p style="margin:0; color: var(--pine-soft);">This visual system supports trust and calm. It helps content feel steady, confident, and easier to return to over time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Resources</p>
+          <h2>Ideas you can use next</h2>
+          <p>Turn this in to a landing page, a story section, a support resource, or a spark for an entirely different concept.</p>
+        </div>
+
+        <div class="article-grid">
+          <a class="article-card" href="#top">
+            <div class="article-thumb">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80" alt="Person smiling outdoors">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Audience</span>
+              <h3>Start with a human story</h3>
+              <p>Share a real experience, a personal motivation, or the moment a decision changed things.</p>
+              <span class="article-source">Story angle <span class="arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="article-card" href="#top">
+            <div class="article-thumb">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="People collaborating around a table">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Product</span>
+              <h3>Turn it into a feature page</h3>
+              <p>Use cards to spotlight benefits, workflows, and support moments that make the experience feel simple.</p>
+              <span class="article-source">Feature use <span class="arrow">→</span></span>
+            </div>
+          </a>
+
+          <a class="article-card" href="#top">
+            <div class="article-thumb">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Open notebook and cup of coffee">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Planning</span>
+              <h3>Build a calmer next step</h3>
+              <p>Use this structure to focus attention on exactly what someone should do next — not everything they could do.</p>
+              <span class="article-source">Next step <span class="arrow">→</span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
+        <p class="small">A calm, flexible template for a future page — ready to be renamed, repurposed, and rebuilt around your own content.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
