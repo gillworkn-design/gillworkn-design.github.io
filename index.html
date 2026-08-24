@@ -719,6 +719,11 @@
   .footer-links{ list-style: none; display: flex; gap: 22px; padding: 0; margin: 0; }
   .footer-links a{ font-size: 0.88rem; text-decoration: none; color: var(--pine-soft); }
   .footer-links a:hover{ color: var(--pine); }
+  .craving-overlay{ display:none; position:fixed; inset:0; z-index:100; align-items:center; justify-content:center; padding:24px; background:rgba(22,48,43,.72); }
+  .craving-overlay.is-open{ display:flex; }
+  .craving-dialog{ position:relative; width:min(900px,100%); height:min(720px,90vh); overflow:hidden; border-radius:var(--radius); background:var(--white); box-shadow:0 18px 60px rgba(0,0,0,.28); }
+  .craving-dialog iframe{ width:100%; height:100%; border:0; }
+  .craving-close{ position:absolute; top:10px; right:12px; z-index:1; width:34px; height:34px; border:0; border-radius:50%; background:var(--pine); color:var(--white); font-size:1.4rem; line-height:1; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -754,10 +759,17 @@
         </div>
       </div>
       <div class="breath-card">
- <button class="button button4">12px</button>
+ <button class="button button4" type="button" id="cravingNowButton">12px</button>
   </div>
 </div>
   </section>
+
+  <div class="craving-overlay" id="cravingOverlay" role="dialog" aria-modal="true" aria-label="Craving Now">
+    <div class="craving-dialog">
+      <button class="craving-close" type="button" id="cravingClose" aria-label="Close overlay">×</button>
+      <iframe src="CravingNow.html" title="Craving Now"></iframe>
+    </div>
+  </div>
 
   <!-- ============ HOW TO QUIT GUIDE ============ -->
   <section id="guide" class="alt">
@@ -1478,6 +1490,36 @@
   });
 
   renderCarousel();
+
+  // ---------- Craving Now overlay ----------
+  const cravingNowButton = document.getElementById('cravingNowButton');
+  const cravingOverlay = document.getElementById('cravingOverlay');
+  const cravingClose = document.getElementById('cravingClose');
+
+  function openCravingOverlay(){
+    cravingOverlay.classList.add('is-open');
+    cravingOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    cravingClose.focus();
+  }
+
+  function closeCravingOverlay(){
+    cravingOverlay.classList.remove('is-open');
+    cravingOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    cravingNowButton.focus();
+  }
+
+  cravingNowButton.addEventListener('click', openCravingOverlay);
+  cravingClose.addEventListener('click', closeCravingOverlay);
+  cravingOverlay.addEventListener('click', (event) => {
+    if(event.target === cravingOverlay) closeCravingOverlay();
+  });
+  document.addEventListener('keydown', (event) => {
+    if(event.key === 'Escape' && cravingOverlay.classList.contains('is-open')){
+      closeCravingOverlay();
+    }
+  });
 </script>
 
 </body>
