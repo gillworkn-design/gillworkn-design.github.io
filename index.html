@@ -170,52 +170,11 @@
     border-radius: 20px;
     padding: 32px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
   }
-  .breath-stage{
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--pine-soft);
-    height: 1.2em;
-    margin-bottom: 18px;
-  }
-  .breath-ring-wrap{
-    position: relative;
-    width: 220px; height: 220px;
-    margin: 0 auto 20px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .breath-ring-wrap svg{ position: absolute; inset: 0; width: 100%; height: 100%; }
-  .breath-track{ fill: none; stroke: var(--mist-dim); stroke-width: 2; }
-  .breath-orb{
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 32% 30%, #6FB8A5, var(--mint));
-    box-shadow: 0 8px 30px rgba(78,156,134,0.35);
-    transform: scale(0.62);
-    transition: transform 4s cubic-bezier(.45,0,.35,1);
-  }
-  .breath-orb.expand{ transform: scale(1); }
-  .breath-orb.hold{ transform: scale(1); }
-  .breath-orb.shrink{ transform: scale(0.62); }
-  .breath-label{
-    font-size: 0.92rem;
-    color: var(--pine-soft);
-    margin-bottom: 18px;
-  }
-  .breath-toggle{
-    font-family: var(--body);
-    font-weight: 600;
-    font-size: 0.88rem;
-    background: var(--mint-soft);
-    color: #1F5B4C;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 100px;
-    cursor: pointer;
-  }
-  .breath-toggle:hover{ background: #c9e5db; }
 
   /* ---------- Section shell ---------- */
   section{ padding: 76px 0; }
@@ -317,7 +276,7 @@
   }
   .tool-card p{ font-size: 0.92rem; color: var(--pine-soft); margin: 0; }
 
-  /* ---------- Timeline (real sequence: recovery is chronological) ---------- */
+  /* ---------- Timeline ---------- */
   .timeline{
     position: relative;
     padding-left: 28px;
@@ -576,28 +535,6 @@
   .crisis a.btn{ background: var(--ember); color: var(--mist); white-space: nowrap; }
   .crisis a.btn:hover{ background: #a5402f; }
 
-.crisis {
-  background: var(--ember-soft);
-    border: 1px solid #7c3aed;
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    display: flex;
-    gap: 18px;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  .crisis p{ margin: 0; font-size: 0.95rem; color: #7A2E1F; max-width: 56ch; }
-  .crisis strong{ font-weight: 700; }
-  .crisis a.btn{ background: var(--ember); color: var(--mist); white-space: nowrap; }
-  .crisis a.btn:hover{ background: #a5402f; }
-
-.purple-crisis {
-  background: #7c3aed;
-  color: white;
-}
-
-
   /* ---------- Articles / resources grid ---------- */
   .article-grid{
     display: grid;
@@ -671,39 +608,30 @@
   }
   .article-source .arrow{ transition: transform 0.15s; }
   .article-card:hover .article-source .arrow{ transform: translateX(3px); }
-  
-.breath-toggle {
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  /* keep whatever padding, background, border-radius, font styles
-     your existing .breath-toggle button rule already has */
-}
 
-.button {
-  background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
+  .button{
+    background-color: var(--pine);
+    border: none;
+    color: var(--mist);
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .button:hover{ background: #0e211d; }
 
-.hero .breath-card .button{
-  padding: 40px 64px;
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.button1 {border-radius: 2px;}
-.button2 {border-radius: 4px;}
-.button3 {border-radius: 8px;}
-.button4 {border-radius: 12px;}
-.button5 {border-radius: 50%;}
+  .hero .breath-card .button{
+    padding: 22px 40px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 100px;
+    background: var(--mint);
+    color: #0E2620;
+  }
+  .hero .breath-card .button:hover{ background: #63b09b; }
 
   /* ---------- Footer ---------- */
   footer{
@@ -719,11 +647,51 @@
   .footer-links{ list-style: none; display: flex; gap: 22px; padding: 0; margin: 0; }
   .footer-links a{ font-size: 0.88rem; text-decoration: none; color: var(--pine-soft); }
   .footer-links a:hover{ color: var(--pine); }
-  .craving-overlay{ display:none; position:fixed; inset:0; z-index:100; align-items:center; justify-content:center; padding:24px; background:rgba(22,48,43,.72); }
-  .craving-overlay.is-open{ display:flex; }
-  .craving-dialog{ position:relative; width:min(900px,100%); height:min(720px,90vh); overflow:hidden; border-radius:var(--radius); background:var(--white); box-shadow:0 18px 60px rgba(0,0,0,.28); }
-  .craving-dialog iframe{ width:100%; height:100%; border:0; }
-  .craving-close{ position:absolute; top:10px; right:12px; z-index:1; width:34px; height:34px; border:0; border-radius:50%; background:var(--pine); color:var(--white); font-size:1.4rem; line-height:1; cursor:pointer; }
+
+  /* ---------- Craving-now overlay modal ---------- */
+  .modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(22,48,43,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 24px;
+  }
+  .modal-overlay.open{ display: flex; }
+
+  .modal-panel{
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 85vh;
+    background: var(--mist);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 28px 90px rgba(0,0,0,0.4);
+  }
+  .modal-panel iframe{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .modal-close{
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--white);
+    color: var(--pine);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .modal-close:hover{ background: var(--mint-soft); }
 </style>
 </head>
 <body>
@@ -737,7 +705,7 @@
       <li><a href="#toolkit">Craving toolkit</a></li>
       <li><a href="#milestones">Milestones</a></li>
       <li><a href="#stories">Stories</a></li>
-	  <li><a href="#articles">Articles</a></li>
+      <li><a href="#articles">Articles</a></li>
     </ul>
     <a href="#guide" class="nav-cta">Start your quit</a>
   </div>
@@ -751,25 +719,17 @@
       <div>
         <p class="eyebrow">Quitting vaping</p>
         <h1>The cravings aren't<br><em>life worthy.</em><br>Let's get through it.</h1>
-        <p class="lede">Quitting vaping can feel difficult, but you don't have to do it alone. Learn how vaping affects you, understand your cravings, and discover practical ways to break the habit. Explore the tools and information to help you take control and move forward.
-</p>
+        <p class="lede">Quitting vaping can feel difficult, but you don't have to do it alone. Learn how vaping affects you, understand your cravings, and discover practical ways to break the habit. Explore the tools and information to help you take control and move forward.</p>
         <div class="hero-actions">
           <a href="#guide" class="btn btn-primary">See what to expect →</a>
           <a href="#toolkit" class="btn btn-ghost">See the craving toolkit</a>
         </div>
       </div>
       <div class="breath-card">
- <button class="button button4" type="button" id="cravingNowButton">12px</button>
-  </div>
-</div>
-  </section>
-
-  <div class="craving-overlay" id="cravingOverlay" role="dialog" aria-modal="true" aria-label="Craving Now">
-    <div class="craving-dialog">
-      <button class="craving-close" type="button" id="cravingClose" aria-label="Close overlay">×</button>
-      <iframe src="CravingNow.html" title="Craving Now"></iframe>
+        <button class="button" id="openCraving">Craving right now?</button>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============ HOW TO QUIT GUIDE ============ -->
   <section id="guide" class="alt">
@@ -959,9 +919,9 @@
 
       <div class="tool-grid">
         <div class="tool-card">
-          <div class="mins">~1 </div>
+          <div class="mins">~1</div>
           <h3>Box breathing</h3>
-          <p>Use the tool at the top of this page. Four counts in, hold, out, hold. Repeat until the pull drops.</p>
+          <p>Four counts in, hold, out, hold. Repeat until the pull drops.</p>
         </div>
         <div class="tool-card">
           <div class="mins">~2</div>
@@ -1048,7 +1008,7 @@
       <div class="section-head">
         <p class="eyebrow">Hearing from others</p>
         <h2>Stories from people who quit</h2>
-        <p>Short videos from people further down the same road. </p>
+        <p>Short videos from people further down the same road.</p>
       </div>
 
       <div class="carousel">
@@ -1151,7 +1111,7 @@
             <span class="article-tag">Staying quit</span>
             <h3>Coping with slip-ups</h3>
             <p>The American Lung Association on why relapses happen, and how to get back on track without starting over.</p>
-            <span class="article-source">meadlineplus.gov<span class="arrow">→</span></span>
+            <span class="article-source">medlineplus.gov <span class="arrow">→</span></span>
           </div>
         </a>
 
@@ -1167,7 +1127,7 @@
         <p>Call 1-800-QUIT-NOW</p>
       </div>
     </div>
-	<br>
+    <br>
     <div class="wrap">
       <div class="crisis">
         <p><strong>Feeling down, hopeless, or depressed?</strong> Free, confidential support is free all day everyday.</p>
@@ -1189,12 +1149,49 @@
       <li><a href="#toolkit">Craving toolkit</a></li>
       <li><a href="#milestones">Milestones</a></li>
       <li><a href="#stories">Stories</a></li>
-	  <li><a href="#articles">Articles</a></li>
+      <li><a href="#articles">Articles</a></li>
     </ul>
   </div>
 </footer>
 
+<!-- ============ CRAVING-NOW OVERLAY MODAL ============ -->
+<div id="cravingModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <iframe id="cravingFrame" src="" title="Craving support"></iframe>
+  </div>
+</div>
+
 <script>
+
+  // ---------- Craving-now overlay ----------
+  const cravingModal = document.getElementById('cravingModal');
+  const cravingFrame = document.getElementById('cravingFrame');
+  const openCravingBtn = document.getElementById('openCraving');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(){
+    cravingFrame.src = 'cravingnow.html'; // <-- must match your actual filename & be hosted alongside this file
+    cravingModal.classList.add('open');
+    cravingModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    cravingModal.classList.remove('open');
+    cravingModal.setAttribute('aria-hidden', 'true');
+    cravingFrame.src = '';
+    document.body.style.overflow = '';
+  }
+
+  openCravingBtn.addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  cravingModal.addEventListener('click', (e) => {
+    if(e.target === cravingModal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && cravingModal.classList.contains('open')) closeModal();
+  });
 
   // ---------- Check-in widget (persisted with localStorage) ----------
   const quitDateInput = document.getElementById('quitDate');
@@ -1213,7 +1210,6 @@
 
   let quitDate = null;
   let tickId = null;
-  // Persisted log: { good: boolean, at: ISOString }. Newest first.
   let entries = [];
   let storageAvailable = true;
 
@@ -1308,7 +1304,6 @@
       return;
     }
 
-    // Load quit date
     try{
       const saved = window.localStorage.getItem(STORAGE_KEY_QUITDATE);
       if(saved){
@@ -1321,7 +1316,6 @@
       setDefaultDateIfEmpty();
     }
 
-    // Load check-in entries
     try{
       const saved = window.localStorage.getItem(STORAGE_KEY_ENTRIES);
       if(saved){
@@ -1398,9 +1392,6 @@
   loadSavedState();
 
   // ---------- Video carousel ----------
-  // Add your own videos here. Two supported shapes:
-  //   { type: 'youtube', id: 'YOUTUBE_VIDEO_ID', title: '...', desc: '...' }
-  //   { type: 'mp4', src: 'path/or/url/to/video.mp4', poster: 'optional-poster.jpg', title: '...', desc: '...' }
   const VIDEOS = [
     {
       type: 'youtube',
@@ -1490,36 +1481,6 @@
   });
 
   renderCarousel();
-
-  // ---------- Craving Now overlay ----------
-  const cravingNowButton = document.getElementById('cravingNowButton');
-  const cravingOverlay = document.getElementById('cravingOverlay');
-  const cravingClose = document.getElementById('cravingClose');
-
-  function openCravingOverlay(){
-    cravingOverlay.classList.add('is-open');
-    cravingOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    cravingClose.focus();
-  }
-
-  function closeCravingOverlay(){
-    cravingOverlay.classList.remove('is-open');
-    cravingOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    cravingNowButton.focus();
-  }
-
-  cravingNowButton.addEventListener('click', openCravingOverlay);
-  cravingClose.addEventListener('click', closeCravingOverlay);
-  cravingOverlay.addEventListener('click', (event) => {
-    if(event.target === cravingOverlay) closeCravingOverlay();
-  });
-  document.addEventListener('keydown', (event) => {
-    if(event.key === 'Escape' && cravingOverlay.classList.contains('is-open')){
-      closeCravingOverlay();
-    }
-  });
 </script>
 
 </body>
