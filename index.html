@@ -174,6 +174,61 @@
     align-items: center;
     justify-content: center;
     min-height: 220px;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .craving-btn{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 38px;
+    font-family: var(--body);
+    font-size: 1.08rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 100px;
+    background: var(--ember);
+    color: var(--mist);
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(193,80,60,0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .craving-btn:hover{
+    background: #a5402f;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(193,80,60,0.45);
+  }
+  .craving-btn:active{ transform: translateY(0); }
+
+  .craving-pulse{
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--mist);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .craving-pulse::before{
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(243,246,244,0.6);
+    animation: pulseRing 1.8s ease-out infinite;
+  }
+  @keyframes pulseRing{
+    0%{ transform: scale(0.6); opacity: 0.9; }
+    100%{ transform: scale(2.3); opacity: 0; }
+  }
+
+  .craving-arrow{ transition: transform 0.15s; }
+  .craving-btn:hover .craving-arrow{ transform: translateX(3px); }
+
+  .craving-sub{
+    font-size: 0.82rem;
+    color: var(--pine-soft);
+    margin: 0;
   }
 
   /* ---------- Section shell ---------- */
@@ -623,16 +678,6 @@
   }
   .button:hover{ background: #0e211d; }
 
-  .hero .breath-card .button{
-    padding: 22px 40px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    border-radius: 100px;
-    background: var(--mint);
-    color: #0E2620;
-  }
-  .hero .breath-card .button:hover{ background: #63b09b; }
-
   /* ---------- Footer ---------- */
   footer{
     padding: 48px 0 60px;
@@ -726,7 +771,12 @@
         </div>
       </div>
       <div class="breath-card">
-        <button class="button" id="openCraving">Craving right now?</button>
+        <button class="craving-btn" id="openCraving">
+          <span class="craving-pulse"></span>
+          <span>Craving right now?</span>
+          <span class="craving-arrow">→</span>
+        </button>
+        <p class="craving-sub">One tap for a reset </p>
       </div>
     </div>
   </section>
