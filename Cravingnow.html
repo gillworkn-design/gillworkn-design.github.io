@@ -23,6 +23,12 @@
       --body: 'Inter', sans-serif;
       --mono: 'IBM Plex Mono', monospace;
       --radius: 14px;
+
+      /* ---- HERO BACKGROUND IMAGE ----
+         Swap this URL for your own image, or leave blank/comment out
+         the background-image line in .hero to go back to plain color. */
+      --hero-image: url('https://images.unsplash.com/photo-1787442218151-76427360a6f1?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      --hero-overlay: rgba(22, 48, 43, 0.72); /* darken/lighten to taste */
     }
 
     * { box-sizing: border-box; }
@@ -118,14 +124,29 @@
       text-decoration: none;
     }
 
+    /* ---- HERO ---- */
     .hero {
+      position: relative;
       padding: 72px 0 88px;
+      background-image: var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      isolation: isolate; /* keeps the ::before overlay contained */
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-overlay);
+      z-index: -1;
     }
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 56px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
     }
     .eyebrow {
       font-family: var(--mono);
@@ -142,6 +163,7 @@
       font-weight: 600;
       letter-spacing: -0.01em;
       margin: 0 0 22px;
+      color: var(--mist);
     }
     h1 em {
       font-style: italic;
@@ -149,14 +171,15 @@
     }
     .hero p.lede {
       font-size: 1.12rem;
-      color: var(--pine-soft);
+      color: var(--mist-dim);
       max-width: 46ch;
-      margin: 0 0 32px;
+      margin: 0 auto 32px;
     }
     .hero-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .btn {
       font-family: var(--body);
@@ -171,53 +194,14 @@
       border: none;
       cursor: pointer;
     }
-    .btn-primary { background: var(--pine); color: var(--mist); }
-    .btn-primary:hover { background: #0e211d; }
+    .btn-primary { background: var(--mint); color: var(--pine); }
+    .btn-primary:hover { background: #3f8873; }
     .btn-ghost {
       background: transparent;
-      color: var(--pine);
-      border: 1.5px solid var(--line);
+      color: var(--mist);
+      border: 1.5px solid rgba(243,246,244,0.5);
     }
-    .btn-ghost:hover { border-color: var(--pine-soft); }
-
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 32px;
-      box-shadow: 0 12px 28px rgba(22,48,43,0.04);
-    }
-    .mini-stat {
-      font-family: var(--mono);
-      color: var(--mint);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      margin-bottom: 18px;
-    }
-    .mini-box {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
-      gap: 16px;
-      margin-top: 22px;
-    }
-    .mini-box .item {
-      background: var(--mist);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px 14px;
-    }
-    .mini-box .num {
-      display: block;
-      font-family: var(--mono);
-      font-size: 1.3rem;
-      margin-bottom: 4px;
-      color: var(--pine);
-    }
-    .mini-box .label {
-      font-size: 0.82rem;
-      color: var(--pine-soft);
-    }
+    .btn-ghost:hover { border-color: var(--mist); }
 
     section { padding: 76px 0; }
     section.alt {
@@ -307,6 +291,128 @@
       line-height: 1;
     }
     .metric .label { color: var(--pine-soft); font-size: 0.88rem; }
+
+    .type-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 720px;
+    }
+    .type-display {
+      font-family: var(--mono);
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      line-height: 1.9;
+      letter-spacing: 0.01em;
+      cursor: text;
+      user-select: none;
+      white-space: normal;
+      overflow-wrap: break-word;
+      margin: 0 0 20px;
+    }
+    .type-display .pending { color: var(--line); }
+    .type-display .correct { color: var(--pine); }
+    .type-display .incorrect {
+      color: var(--ember);
+      background: var(--ember-soft);
+      border-radius: 3px;
+    }
+    .type-display .caret {
+      display: inline-block;
+      width: 2px;
+      margin: 0 -1px 0 -1px;
+      background: var(--mint);
+      animation: caretBlink 1s step-end infinite;
+      position: relative;
+      top: 0.14em;
+      height: 1em;
+      vertical-align: text-bottom;
+    }
+    @keyframes caretBlink {
+      50% { opacity: 0; }
+    }
+    .type-input-hidden {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      border: none;
+      padding: 0;
+      pointer-events: none;
+    }
+    .type-status {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--pine-soft);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 1.6em;
+    }
+
+    .steady-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 720px;
+    }
+    .steady-sentence {
+      font-family: var(--display);
+      font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+      line-height: 1.5;
+      color: var(--pine);
+      min-height: 3.2em;
+      margin: 0 0 26px;
+    }
+    .steady-sentence .filled {
+      color: var(--mint);
+      font-style: italic;
+    }
+    .steady-sentence .blank {
+      display: inline-block;
+      border-bottom: 2px solid var(--line);
+      width: 6.5ch;
+    }
+    .steady-prompt {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--pine-soft);
+      margin: 0 0 14px;
+    }
+    .steady-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 11px 18px;
+      border-radius: 100px;
+      border: 1.5px solid var(--line);
+      background: var(--mist);
+      color: var(--pine);
+      cursor: pointer;
+      transition: transform 0.08s ease, background 0.15s, border-color 0.15s;
+    }
+    .chip:hover { border-color: var(--mint); background: var(--mint-soft); }
+    .chip:active { transform: scale(0.94); }
+    .steady-done {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .steady-count {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--pine-soft);
+      margin-top: 18px;
+    }
 
     .article-grid {
       display: grid;
@@ -411,7 +517,6 @@
     .footer-links a:hover { color: var(--pine); }
 
     @media (max-width: 860px) {
-      .hero-grid,
       .split,
       .card-grid,
       .article-grid {
@@ -426,7 +531,6 @@
         border: 0;
         border-radius: 0;
       }
-      .mini-box { grid-template-columns: 1fr; }
       .hero { padding-top: 52px; }
     }
   </style>
@@ -436,12 +540,12 @@
     <div class="wrap nav">
       <a href="#top" class="wordmark"><span class="dot"></span>Clearing</a>
       <ul class="nav-links">
-        <li><a href="#overview">Overview</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#insights">Insights</a></li>
+        <li><a href="#steady">Steady</a></li>
+        <li><a href="#typewrite">Type</a></li>
         <li><a href="#resources">Resources</a></li>
       </ul>
-      <a href="#overview" class="nav-cta">Get started</a>
     </div>
   </header>
 
@@ -449,74 +553,9 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow">Untitled page</p>
-          <h1>Small steps, <em>clearer days</em>, and a calmer rhythm.</h1>
-          <p class="lede">This page is designed for focus, clarity, and momentum. Use it as a starting point for a project, story, campaign, or personal reset — all within the same calm brand system used across the site.</p>
+          <h1>Are you, <em>Craving Now</em>, power through it.</h1>
           <div class="hero-actions">
-            <a href="#overview" class="btn btn-primary">See the overview →</a>
-            <a href="#features" class="btn btn-ghost">Explore features</a>
-          </div>
-        </div>
 
-        <div class="feature-card">
-          <div class="mini-stat">Progress snapshot</div>
-          <h2 style="margin:0 0 8px; font-size: clamp(1.7rem, 2vw, 2.3rem);">A calmer way to move forward.</h2>
-          <p style="margin:0; color: var(--pine-soft);">Build trust by making the next step feel simple, human, and achievable.</p>
-
-          <div class="mini-box">
-            <div class="item">
-              <span class="num">24</span>
-              <span class="label">Daily wins</span>
-            </div>
-            <div class="item">
-              <span class="num">4.8</span>
-              <span class="label">Focus score</span>
-            </div>
-            <div class="item">
-              <span class="num">12</span>
-              <span class="label">Reset tools</span>
-            </div>
-            <div class="item">
-              <span class="num">1</span>
-              <span class="label">Clear next step</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="overview" class="alt">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Overview</p>
-          <h2>Built for clarity and momentum</h2>
-          <p>Use this untitled page as a clean foundation for a story, a landing section, or a focused concept page that needs a calm, well-structured narrative.</p>
-        </div>
-
-        <div class="split">
-          <div class="list-panel">
-            <h3 style="font-family: var(--display); font-size: 1.4rem; margin-top: 0; margin-bottom: 12px;">What this layout helps with</h3>
-            <ul>
-              <li>Introduces a central idea in a clear, readable way.</li>
-              <li>Builds trust with calm typography and simple visual rhythm.</li>
-              <li>Creates space for action without feeling crowded.</li>
-              <li>Works well for mission-driven, wellness, or product storytelling.</li>
-            </ul>
-          </div>
-
-          <div class="stat-stack">
-            <div class="metric">
-              <span class="num">01</span>
-              <span class="label">Set the tone with a steady headline and a simple promise.</span>
-            </div>
-            <div class="metric">
-              <span class="num">02</span>
-              <span class="label">Give readers a clear next action without overwhelming them.</span>
-            </div>
-            <div class="metric">
-              <span class="num">03</span>
-              <span class="label">Use supportive details to keep the journey approachable.</span>
-            </div>
           </div>
         </div>
       </div>
@@ -568,6 +607,39 @@
             <h3 style="font-family: var(--display); font-size: 1.5rem; margin-top: 0; margin-bottom: 14px;">More than decoration</h3>
             <p style="margin:0; color: var(--pine-soft);">This visual system supports trust and calm. It helps content feel steady, confident, and easier to return to over time.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="steady">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Tactile</p>
+          <h2>Something for your hands</h2>
+          <p>No typing here — just tap through the choices to build the sentence. A small, repeatable motion for moments when your hands want something to do.</p>
+        </div>
+
+        <div class="steady-panel">
+          <p class="steady-prompt" id="steadyPrompt">Tap a word to begin</p>
+          <p class="steady-sentence" id="steadySentence"></p>
+          <div class="steady-options" id="steadyOptions"></div>
+          <p class="steady-count" id="steadyCount">Round 1</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="typewrite" class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Focus type</p>
+          <h2>Type it out, keep your hands busy</h2>
+          <p>The sentence starts greyed out. Type it exactly as shown and each letter turns solid as you land it — a quieter version of a typing test.</p>
+        </div>
+
+        <div class="type-panel">
+          <div class="type-display" id="typeDisplay" tabindex="0"></div>
+          <input id="typeInput" class="type-input-hidden" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Type the sentence shown above">
+          <div class="type-status" id="typeStatus"></div>
         </div>
       </div>
     </section>
@@ -628,12 +700,178 @@
         <p class="small">A calm, flexible template for a future page — ready to be renamed, repurposed, and rebuilt around your own content.</p>
       </div>
       <ul class="footer-links">
-        <li><a href="#overview">Overview</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#insights">Insights</a></li>
         <li><a href="#resources">Resources</a></li>
       </ul>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var steps = [
+        {
+          prompt: "Right now, things feel...",
+          options: ["steady", "unsettled", "tired", "okay", "restless", "hopeful"]
+        },
+        {
+          prompt: "The next small thing is...",
+          options: ["five quiet minutes", "one short message", "a glass of water", "a short walk", "this one task", "putting it down"]
+        },
+        {
+          prompt: "And that is...",
+          options: ["enough for now", "not forever", "allowed", "a fair start", "worth doing", "fine as it is"]
+        }
+      ];
+
+      var template = "Right now, things feel {0}. The next small thing is {1}. And that is {2}.";
+
+      var round = 1;
+      var stepIndex = 0;
+      var chosen = [];
+
+      var promptEl = document.getElementById("steadyPrompt");
+      var sentenceEl = document.getElementById("steadySentence");
+      var optionsEl = document.getElementById("steadyOptions");
+      var countEl = document.getElementById("steadyCount");
+
+      function shuffled(arr) {
+        var copy = arr.slice();
+        for (var i = copy.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = copy[i]; copy[i] = copy[j]; copy[j] = t;
+        }
+        return copy;
+      }
+
+      function renderSentence() {
+        var parts = template.split(/\{\d\}/);
+        var html = "";
+        for (var i = 0; i < parts.length; i++) {
+          html += parts[i];
+          if (i < 3) {
+            if (chosen[i] !== undefined) {
+              html += '<span class="filled">' + chosen[i] + "</span>";
+            } else if (i === stepIndex) {
+              html += '<span class="blank"></span>';
+            } else {
+              html += '<span class="blank"></span>';
+            }
+          }
+        }
+        sentenceEl.innerHTML = html;
+      }
+
+      function renderOptions() {
+        optionsEl.innerHTML = "";
+
+        if (stepIndex >= steps.length) {
+          promptEl.textContent = "Sentence complete";
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "chip";
+          btn.textContent = "Tap for another round";
+          btn.addEventListener("click", startRound);
+          optionsEl.appendChild(btn);
+          countEl.textContent = "Round " + round + " complete";
+          return;
+        }
+
+        promptEl.textContent = steps[stepIndex].prompt;
+        var opts = shuffled(steps[stepIndex].options);
+        opts.forEach(function (word) {
+          var chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "chip";
+          chip.textContent = word;
+          chip.addEventListener("click", function () {
+            chosen[stepIndex] = word;
+            stepIndex++;
+            renderSentence();
+            renderOptions();
+          });
+          optionsEl.appendChild(chip);
+        });
+        countEl.textContent = "Round " + round + " · step " + (stepIndex + 1) + " of " + steps.length;
+      }
+
+      function startRound() {
+        round++;
+        stepIndex = 0;
+        chosen = [];
+        renderSentence();
+        renderOptions();
+      }
+
+      renderSentence();
+      renderOptions();
+
+      var typeSentences = [
+        "Slow down. You are allowed to take this one step at a time.",
+        "The next right thing is usually smaller than it feels.",
+        "Progress counts even when it moves quietly.",
+        "You do not have to finish today, only begin."
+      ];
+      var typeIndex = Math.floor(Math.random() * typeSentences.length);
+
+      var typeDisplay = document.getElementById("typeDisplay");
+      var typeInput = document.getElementById("typeInput");
+      var typeStatus = document.getElementById("typeStatus");
+
+      function currentTarget() {
+        return typeSentences[typeIndex];
+      }
+
+      function renderType() {
+        var target = currentTarget();
+        var value = typeInput.value;
+        var html = "";
+        for (var i = 0; i < target.length; i++) {
+          if (i === value.length && !typeInput.disabled) {
+            html += '<span class="caret"></span>';
+          }
+          var cls = i < value.length ? (value[i] === target[i] ? "correct" : "incorrect") : "pending";
+          var ch = target[i] === " " ? " " : target[i];
+          html += '<span class="' + cls + '">' + ch + "</span>";
+        }
+        if (value.length >= target.length && !typeInput.disabled) {
+          html += '<span class="caret"></span>';
+        }
+        typeDisplay.innerHTML = html;
+
+        if (value.length >= target.length) {
+          typeStatus.textContent = "Nice. Tap the sentence for another.";
+          typeInput.disabled = true;
+        } else {
+          typeStatus.textContent = value.length + " of " + target.length + " characters";
+        }
+      }
+
+      function loadTypeSentence(advance) {
+        if (advance) {
+          typeIndex = (typeIndex + 1) % typeSentences.length;
+        }
+        typeInput.disabled = false;
+        typeInput.value = "";
+        typeInput.maxLength = currentTarget().length;
+        renderType();
+      }
+
+      typeDisplay.addEventListener("click", function () {
+        if (typeInput.disabled) {
+          loadTypeSentence(true);
+        }
+        typeInput.focus();
+      });
+      typeInput.addEventListener("input", renderType);
+      typeInput.addEventListener("blur", function () {
+        if (!typeInput.disabled) {
+          // keep caret ready for a click back in
+        }
+      });
+
+      loadTypeSentence(false);
+    })();
+  </script>
 </body>
 </html>
